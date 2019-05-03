@@ -1,11 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
 <style>
+:root {
+	--nav-color: orange;
+}
+
+a{
+	color:blue;
+	text-decoration: none;
+}
+
+a:visited{
+	color: blue;
+}
+/* Dropdown Button */
+.dropbtn {
+  margin-top: 50px;
+  border: 0;
+  padding: 0;
+  background: var(--nav-color);
+  font-family: Arial;
+  text-decoration: none;
+  color: blue;	
+  cursor: pointer;
+  font-size:14px;
+
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: blue;
+  color: white;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+body {
+	margin: 0px;
+}
+
+h1{
+	margin-top: 0;
+}
+
+input {
+	
+	margin-right: 40px;
+	margin-top: 30px;
+	float:right;
+	position: relative;
+	z-index:99;
+	
+}
+
+label {
+	position: relative;
+	z-index:99;
+	color:black;
+	float: right;
+	margin-right: 20px;
+	margin-top: 30px;
+}
+
+
+
+
 .a {
+	width: 700px;
+	font-family: "Arial";
 	text-align: center;
-	padding: 20px;
-	margin: 50px;
+	margin: 0 auto 50px auto;
+	padding-top: 50px;
 }
 
 .b {
@@ -14,9 +110,7 @@
 	margin-right: 100px;
 	margin-left: 0px;
 	border: 1px solid black;
-	position: static;
-	
-
+	position: static;	
 	
 }
 
@@ -26,8 +120,7 @@
 	margin-left: 250px;
 	margin-right: 0px;
 	float:left;
-
-
+	margin-bottom:30px;
 
 }
 
@@ -45,19 +138,21 @@
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	background: orange;
+	background: var(--nav-color);
 	position: fixed; 
 }
 
 .nav-bar > .element {
 width: 19.5%;
-line-height: 50px;
+line-height: 100px;
 text-align: center;
 color: black;
 display: inline-block;
 margin: 0;
 font-family: Arial;
-text-decoration: none; }
+text-decoration: none;
+font-size: 14px; 
+}
 
 .element>a{
 	
@@ -74,14 +169,16 @@ text-decoration: none; }
   min-height: 100vh;
 }
 #content-wrap {
+  background: whitesmoke;
   padding-bottom: 2.5rem;    /* Footer height */
 }
 #footer {
-  background:orange;
+  background:var(--nav-color);
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 2.5rem;            /* Footer height */
+  height: 2.5rem;
+  text-align: center;            /* Footer height */
 }
 
 .footer-elem {
@@ -89,14 +186,27 @@ text-decoration: none; }
  margin-left:100px;
  display:inline-block;
  text-align: center;
+ padding: 10px;
 }
+
+
+
 
 
 		
 </style>
 <title>Personal Website</title>
+
+
 </head>
+
+
+
 <body>
+
+  <input id = "color-input" type="color" value="#FFA500">
+  <label for = "color-input"> Change border color: </label>
+  
 	
 
 
@@ -113,15 +223,27 @@ text-decoration: none; }
 
 		</div>	
 
+		<div class="dropdown">
+  		<button onclick="dropMenu()" class="dropbtn">Coursework</button>
+  		<div id="coursework" class="dropdown-content">
+    		<a href="./Freshmen.html">Freshmen</a>
+    		<a href="./Sophomore.html">Sophomore</a>
+    		<a href="./Junior.html">Junior</a>
+    		<a href="./Senior.html">Senior</a>
+  		</div>
+		</div>
+
 		
 	</div>
+
+
 	<div class="a">
 		<h1>Mark Chen's Website</h1>
 		
 		<h3> Introduction </h3>
 	</div>
 	<div class ="c">
-		<img src ="sitepic.png" style="width:300px;height:400;">
+		<img src ="sitepic.png" style="width:300px;height:375px;">
 	</div>
 	<div class= "b">
 		<p> Hi, my name is Mark. <br> Welcome to my website.</p>
@@ -136,10 +258,10 @@ text-decoration: none; }
    </div>
    <footer id="footer">
    <div class="footer-elem">
-    <a href="https://github.com/markchen1357.com">Github</a>
+    <a href="https://github.com/markchen1357">Github</a>
     </div>
     <div class="footer-elem">
-    markchen@andrew.cmu.edu
+    <a href="mailto:markdchen@andrew.cmu.edu">Email	</a>
     </div>
     <div class="footer-elem">
     (949)636-9414
@@ -149,5 +271,40 @@ text-decoration: none; }
 
 
 </body>
+
+<script>
+
+var input = document.querySelector('#color-input');
+var navbar = document.querySelector('.nav-bar');
+var footer = document.querySelector('#footer')
+var button = document.querySelector('.dropbtn')
+
+input.addEventListener('change', function(){
+  footer.style.setProperty('--nav-color', input.value);
+  navbar.style.setProperty('--nav-color', input.value);
+  button.style.setProperty('--nav-color', input.value);
+})
+
+
+function dropMenu() {
+  document.getElementById("coursework").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+
 </html>
 
